@@ -6,8 +6,8 @@ import React from 'react';
 
 const LikeSection = props => {
   // 🔥 Make sure the parent of LikeSection is passing the right props!
-  const { likePost, numberOfLikes } = props;
-console.log(likePost)
+  const { likePost, numberOfLikes, count } = props;
+  
   return (
     <div>
       <div
@@ -15,7 +15,7 @@ console.log(likePost)
         key='likes-icons-container'
       >
         <div className='like-section-wrapper' onClick={likePost}>
-          ❤️
+          {count >= 1 ? '❤️' : '🤍'}
         </div>
         <div className='like-section-wrapper'>
           💬

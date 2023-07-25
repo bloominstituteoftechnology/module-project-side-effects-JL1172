@@ -17,7 +17,7 @@ const App = () => {
   // This state is the source of truth for the data inside the app. You won't be needing dummyData anymore.
   // To make the search bar work (which is stretch) we'd need another state to hold the search term.
 const [count,setCount] = useState(0);
-
+const [searchTerm,setSearchTerm] = useState('');
 const [posts,setPosts] = useState(dummyData)
   const likePost = postId => {
     /*
@@ -49,12 +49,19 @@ const [posts,setPosts] = useState(dummyData)
     }
   };
 
+  const filteredFriends = () => {
+    const termsList = searchTerm.trim().toLowerCase();
+    if (!termsList) return posts;
+    return posts.filter(pst => {
+      return pst.username.toLowerCase().includes(termsList);
+    })  
+  }
 
-  
+
   return (
     <div className='App'>
-      <SearchBar />
-      <Posts likePost = {likePost} posts = {posts} count = {count}/> 
+      <SearchBar setSearchTerm = {setSearchTerm} />
+      <Posts likePost = {likePost} posts = {filteredFriends()} count = {count}/> 
       {/* Add SearchBar and Posts here to render them */}
       {/* Check the implementation of each component, to see what props they require, if any! */}
     </div>
